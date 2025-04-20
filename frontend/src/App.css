@@ -1,0 +1,141 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9cfe6;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background: rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+  /* Pusatkan container di tengah halaman */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+textarea {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: none; /* Mencegah perubahan ukuran textarea */
+}
+
+button {
+  padding: 10px;
+  background-color: #3b3b92;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #6565be;
+}
+
+.note {
+  background: #d9dfff;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.note h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.note p {
+  margin: 10px 0;
+  color: #555;
+}
+
+.buttonEdit {
+  background-color: #4d86ff;
+  margin-right: 5px;
+}
+
+.buttonEdit:hover {
+  background-color: #a4c1ff;
+  margin-right: 5px;
+}
+
+.buttonDelete {
+  background-color: #ff3737;
+  margin-right: 5px;
+}
+
+.buttonDelete:hover {
+  background-color: #ff8f8f;
+  margin-right: 5px;
+}
+
+@media (max-width: 600px) {
+  .container {
+      width: 95%;
+  }
+
+  input[type="text"],
+  textarea {
+      font-size: 14px;
+  }
+
+  button {
+      font-size: 14px;
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin: 0 0 10px;
+}
+
+.modal-content button {
+    margin: 5px;
+}
+}
