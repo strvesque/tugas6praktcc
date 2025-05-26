@@ -3,12 +3,17 @@ service: notes-frontend-cica
 instance_class: F1
 
 handlers:
-  - url: /
+  # Tangani semua file statis
+  - url: /static
+    static_dir: build/static
+
+  - url: /(.*\.(js|css|png|jpg|jpeg|gif|svg|ico|json|woff2?|ttf|map))
+    static_files: build/\1
+    upload: build/.*\.(js|css|png|jpg|jpeg|gif|svg|ico|json|woff2?|ttf|map)
+
+  # Redirect semua route lainnya ke index.html (untuk React Router)
+  - url: /.*
     static_files: build/index.html
     upload: build/index.html
-
-  - url: /(.*)
-    static_files: build/\1
-    upload: build/(.*)
 
 default_expiration: "1h"

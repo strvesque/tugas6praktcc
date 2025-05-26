@@ -17,7 +17,14 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/notes" />} />
+        <Route
+  path="/notes"
+  element={
+    <PrivateRoute>
+      <NotesPage />
+    </PrivateRoute>
+  }
+/>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route
