@@ -9,7 +9,8 @@ const register = async (req, res) => {
     db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword], (err, results) => {
         if (err) return res.status(500).json({ error: 'Register gagal' });
         const token = jwt.sign({ id: results.insertId }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
-        res.status(201).json({ token, message: 'User terdaftar' });
+        res.status(201).json({ token });
+        res.status(201).json({ message: 'User terdaftar' });
     });
 };
 
