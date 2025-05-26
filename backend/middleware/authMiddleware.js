@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
+    // Allow preflight requests (OPTIONS)
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(204); // or next();
+    }
+
     const bearer = req.headers['authorization'];
     const token = bearer && bearer.split(' ')[1];
 
