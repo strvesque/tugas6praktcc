@@ -9,8 +9,7 @@ const register = async (req, res) => {
     db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword], (err, results) => {
         if (err) return res.status(500).json({ error: 'Register gagal' });
         const token = jwt.sign({ id: results.insertId }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
-        res.status(201).json({ token });
-        res.status(201).json({ message: 'User terdaftar' });
+        res.status(201).json({ token, message: 'User terdaftar' });
     });
 };
 
@@ -18,14 +17,32 @@ const login = (req, res) => {
     const { username, password } = req.body;
 
     db.query('SELECT * FROM users WHERE username = ?', [username], async (err, results) => {
-        if (err || results.length === 0) return res.status(401).json({ error: 'User tidak ditemukan' });
+        if (err) {
+            console.error('DB Error:', err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
 
-        const isMatch = await bcrypt.compare(password, results[0].password);
-        if (!isMatch) return res.status(401).json({ error: 'Password salah' });
+        if (results.length === 0) {
+            console.log(`Username "${username}" tidak ditemukan`);
+            return res.status(401).json({ error: 'User tidak ditemukan' });
+        }
 
-        const token = jwt.sign({ id: results[0].id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
+        const user = results[0];
+        console.log(`Login attempt for ${username}. Password (input): ${password}`);
+        console.log(`Password (stored hash): ${user.password}`);
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            console.log('Password tidak cocok');
+            return res.status(401).json({ error: 'Password salah' });
+        }
+
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_EXPIRES_IN
+        });
         res.json({ token });
     });
 };
+
 
 module.exports = { register, login };
