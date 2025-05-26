@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL, saveToken } from './utils.js';
 import './LoginPage.css';
+import backgroundImage from './assets/background.jpeg';
 
 function LoginPage() {
   const [username, setUsername] = useState('');
