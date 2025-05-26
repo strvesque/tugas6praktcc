@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL, saveToken } from './utils.js';
+import './LoginPage.css';
 
 function RegisterPage() {
   const [username, setUsername] = useState('');
@@ -9,13 +10,15 @@ function RegisterPage() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
     const res = await fetch(`${BASE_URL}/api/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password }),
     });
 
     const data = await res.json();
+
     if (data.token) {
       saveToken(data.token);
       navigate('/notes');
@@ -43,7 +46,11 @@ function RegisterPage() {
           required
         />
         <button type="submit">Register</button>
-        <button type="button" onClick={() => navigate('/')} style={{ marginTop: '10px' }}>
+        <button
+          type="button"
+          onClick={() => navigate('/login')}
+          style={{ marginTop: '10px' }}
+        >
           Sudah punya akun? Login
         </button>
       </form>
