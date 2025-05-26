@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BASE_URL } from './utils.js';
-import { saveToken } from './utils.js';
+import { BASE_URL, saveToken } from './utils.js';
 
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     const res = await fetch(`${BASE_URL}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -24,28 +24,29 @@ function LoginPage() {
     }
   };
 
-  const goToRegister = () => {
-    navigate('/register');
-  };
-
   return (
-    <div>
-      <h2>Login</h2>
-      <input
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        placeholder="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <div>
-        <button onClick={handleLogin}>Login</button>
-        <button onClick={goToRegister}>Register</button>
-      </div>
+    <div className="container">
+      <h1>Login</h1>
+      <form onSubmit={handleLogin}>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Login</button>
+        <button type="button" onClick={() => navigate('/register')} style={{ marginTop: '10px' }}>
+          Belum punya akun? Daftar
+        </button>
+      </form>
     </div>
   );
 }
