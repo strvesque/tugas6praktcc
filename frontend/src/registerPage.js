@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { saveToken } from '../utils/auth';
+import { saveToken } from './utils.js';
 
 function RegisterPage() {
   const [username, setUsername] = useState('');

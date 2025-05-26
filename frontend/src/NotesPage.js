@@ -4,7 +4,7 @@ import axios from 'axios';
 import './App.css';
 import backgroundImage from './assets/background.jpeg';
 import { BASE_URL } from './utils.js';
-import { getToken, removeToken } from './utils/auth';
+import { getToken, removeToken } from './utils.js';
 import { useNavigate } from 'react-router-dom';
 
 function NotesPage() {
@@ -18,12 +18,13 @@ function NotesPage() {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (!getToken()) {
-      navigate('/login');
-    } else {
-      fetchNotes();
-    }
-  }, []);
+  const token = getToken();
+  if (!token) {
+    navigate('/login');
+  } else {
+    fetchNotes();
+  }
+}, [navigate]);
 
   const fetchNotes = async () => {
     const response = await axios.get(`${BASE_URL}/api/notes`, {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { saveToken } from '../utils/auth';
+import { saveToken } from './utils.js';
 
 function LoginPage() {
   const [username, setUsername] = useState('');
@@ -23,12 +23,28 @@ function LoginPage() {
     }
   };
 
+  const goToRegister = () => {
+    navigate('/register');
+  };
+
   return (
     <div>
       <h2>Login</h2>
-      <input placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
-      <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
-      <button onClick={handleLogin}>Login</button>
+      <input
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        placeholder="Password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <div>
+        <button onClick={handleLogin}>Login</button>
+        <button onClick={goToRegister}>Register</button>
+      </div>
     </div>
   );
 }

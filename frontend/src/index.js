@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './index.css';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import NotesPage from './NotesPage';
-import { isLoggedIn } from './utils/auth';
+import LoginPage from './loginPage.js';
+import RegisterPage from './registerPage.js';
+import NotesPage from './NotesPage.js';
+import { isLoggedIn } from './utils.js';
 import reportWebVitals from './reportWebVitals';
 
 const PrivateRoute = ({ children }) => {
