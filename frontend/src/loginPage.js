@@ -27,6 +27,19 @@ function LoginPage() {
   };
 
   return (
+    <div
+      className="app-container"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
     <div className="container">
       <h1>Login</h1>
       <form onSubmit={handleLogin}>
@@ -49,6 +62,7 @@ function LoginPage() {
           Belum punya akun? Daftar
         </button>
       </form>
+    </div>
     </div>
   );
 }

@@ -29,6 +29,19 @@ function RegisterPage() {
   };
 
   return (
+    <div
+      className="app-container"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
     <div className="container">
       <h1>Register</h1>
       <form onSubmit={handleRegister}>
@@ -55,6 +68,7 @@ function RegisterPage() {
           Sudah punya akun? Login
         </button>
       </form>
+    </div>
     </div>
   );
 }
