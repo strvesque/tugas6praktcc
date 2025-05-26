@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const verifyToken = require('../middleware/authMiddleware');
 
 // Create a new note
-router.post('/', (req, res) => {
+router.post('/', verifyToken, (req, res) => {
     const { title, content } = req.body;
     const sql = 'INSERT INTO notes (title, content) VALUES (?, ?)';
     db.query(sql, [title, content], (err, result) => {
@@ -15,7 +16,7 @@ router.post('/', (req, res) => {
 });
 
 // Get all notes
-router.get('/', (req, res) => {
+router.get('/', verifyToken, (req, res) => {
     const sql = 'SELECT * FROM notes';
     db.query(sql, (err, results) => {
         if (err) {
@@ -26,7 +27,7 @@ router.get('/', (req, res) => {
 });
 
 // Update a note
-router.put('/:id', (req, res) => {
+router.put('/:id', verifyToken, (req, res) => {
     const { title, content } = req.body;
     const sql = 'UPDATE notes SET title = ?, content = ? WHERE id = ?';
     db.query(sql, [title, content, req.params.id], (err, result) => {
@@ -38,7 +39,7 @@ router.put('/:id', (req, res) => {
 });
 
 // Delete a note
-router.delete('/:id', (req, res) => {
+router.delete('/:id', verifyToken, (req, res) => {
     const sql = 'DELETE FROM notes WHERE id = ?';
     db.query(sql, [req.params.id], (err, result) => {
         if (err) {

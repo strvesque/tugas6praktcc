@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/notes', notesRouter);
+app.use('/api/auth', authRoute);
 
 // Start server
 app.listen(PORT, () => {
