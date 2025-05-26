@@ -9,7 +9,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const res = await fetch(`${BASE_URL}/api/auth/register`, {
+    const res = await fetch(`${BASE_URL}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
